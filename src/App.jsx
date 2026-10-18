@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ServicesSection from './components/ServicesSection';
 import ProcessSection from './components/ProcessSection';
 import WhyUsSection from './components/WhyUsSection';
-import RoiCalculator from './components/RoiCalculator';
 import IndustriesSection from './components/IndustriesSection';
 import CaseStudiesSection from './components/CaseStudiesSection';
 import ContactSection from './components/ContactSection';
@@ -12,10 +11,40 @@ import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import ConsultationModal from './components/ConsultationModal';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import ContactUsPage from './pages/ContactUsPage';
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('Meta Ads');
+
+  // Client-side route detection for /contact-us
+  const [currentRoute, setCurrentRoute] = useState(() => {
+    const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+    const hash = window.location.hash;
+    if (pathname === '/contact-us' || hash === '#/contact-us') {
+      return '/contact-us';
+    }
+    return '/';
+  });
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+      const hash = window.location.hash;
+      if (pathname === '/contact-us' || hash === '#/contact-us') {
+        setCurrentRoute('/contact-us');
+      } else {
+        setCurrentRoute('/');
+      }
+    };
+
+    window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener('hashchange', handleRouteChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('hashchange', handleRouteChange);
+    };
+  }, []);
 
   const handleOpenConsultation = (serviceName = '') => {
     if (serviceName) {
@@ -31,13 +60,20 @@ export default function App() {
     }
   };
 
+  // Dedicated Route: /contact-us without header and footer
+  if (currentRoute === '/contact-us') {
+    return <ContactUsPage />;
+  }
+
+  // Default Home Page with Full Navigation & Experience
   return (
-    <div className="min-h-screen bg-wolf-950 text-wolf-100 relative selection:bg-gold-500/25 selection:text-gold-200">
+    <div className="min-h-screen bg-wolf-950 text-wolf-100 relative selection:bg-gold-500/25 selection:text-gold-200 w-full max-w-full overflow-x-hidden">
       {/* Top Navbar */}
       <Navbar onOpenConsultation={() => handleOpenConsultation()} />
 
-      {/* Hero Section */}
-      <main>
+      {/* Main Sections */}
+      <main className="w-full max-w-full overflow-x-hidden">
+        {/* Hero Section */}
         <Hero onOpenConsultation={() => handleOpenConsultation()} />
 
         {/* Core Services Section */}
@@ -48,9 +84,6 @@ export default function App() {
 
         {/* Why Us / Manifesto & Deliverables */}
         <WhyUsSection onOpenConsultation={() => handleOpenConsultation()} />
-
-        {/* Interactive Growth / ROI Estimator */}
-        <RoiCalculator onOpenConsultation={() => handleOpenConsultation()} />
 
         {/* Who We Work With (Industries) */}
         <IndustriesSection onSelectIndustry={handleSelectIndustry} />

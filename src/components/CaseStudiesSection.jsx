@@ -1,27 +1,31 @@
-import React from 'react';
-import { CASE_STUDIES } from '../data/agencyData';
-import { ArrowUpRight } from 'lucide-react';
+import React from "react";
+import { CASE_STUDIES } from "../data/agencyData";
+import { ArrowUpRight } from "lucide-react";
 
 export default function CaseStudiesSection({ onOpenConsultation }) {
   return (
-    <section id="results" className="py-24 px-4 sm:px-6 lg:px-8 border-b border-gold-500/20 bg-wolf-950">
-      <div className="max-w-7xl mx-auto">
-        
+    <section
+      id="results"
+      className="py-8 px-4 sm:px-6 lg:px-8 border-b border-gold-500/20 bg-wolf-950 w-full overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto w-full">
         {/* Editorial Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-wolf-850 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-wolf-850 gap-6">
           <div>
             <div className="flex items-center gap-3 mb-3">
               <span className="w-8 h-[2px] bg-gold-500" />
               <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-gold-400">
-                06 // Verifiable Performance
+                05 // Verifiable Performance
               </span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-syne font-black uppercase text-white tracking-tight">
-              Case <span className="text-gold-gradient">Studies &gt;&gt;&gt;</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-extrabold uppercase text-white tracking-tight">
+              Case{" "}
+              <span className="text-gold-gradient">Studies &gt;&gt;&gt;</span>
             </h2>
           </div>
           <p className="text-wolf-300 text-sm sm:text-base max-w-md">
-            Documented client campaigns with verified ad spend, lead costs, and revenue returns.
+            Documented client campaigns with verified ad spend, lead costs, and
+            revenue returns.
           </p>
         </div>
 
@@ -30,7 +34,7 @@ export default function CaseStudiesSection({ onOpenConsultation }) {
           {CASE_STUDIES.map((study, idx) => (
             <div
               key={idx}
-              className="bg-wolf-900 border border-wolf-800 hover:border-gold-500/40 p-7 flex flex-col justify-between transition-colors"
+              className="bg-wolf-900 border border-wolf-800 hover:border-gold-500/40 rounded-2xl p-7 flex flex-col justify-between transition-colors"
             >
               <div>
                 <div className="flex items-center justify-between pb-3 border-b border-wolf-850 mb-4">
@@ -42,12 +46,12 @@ export default function CaseStudiesSection({ onOpenConsultation }) {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-syne font-black uppercase text-white mb-4">
+                <h3 className="text-xl font-sans font-bold uppercase text-white mb-4">
                   {study.client}
                 </h3>
 
                 {/* Metrics Box */}
-                <div className="grid grid-cols-3 gap-2 bg-black border border-wolf-800 p-3.5 mb-5">
+                <div className="grid grid-cols-3 gap-2 bg-black border border-wolf-800 rounded-xl p-3.5 mb-5">
                   {study.metrics.map((m, mIdx) => (
                     <div key={mIdx} className="text-center">
                       <div className="text-base font-mono font-bold text-gold-400">
@@ -71,7 +75,7 @@ export default function CaseStudiesSection({ onOpenConsultation }) {
                 </span>
                 <button
                   onClick={onOpenConsultation}
-                  className="font-syne text-xs font-bold uppercase tracking-wider text-gold-400 hover:text-white flex items-center gap-1 transition-colors"
+                  className="font-sans text-xs font-bold uppercase tracking-wider text-gold-400 hover:text-white flex items-center gap-1 transition-colors"
                 >
                   <span>Replicate Results</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -80,7 +84,6 @@ export default function CaseStudiesSection({ onOpenConsultation }) {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

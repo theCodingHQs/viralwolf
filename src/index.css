@@ -6,11 +6,26 @@
   html {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     color-scheme: dark;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    -webkit-text-size-adjust: 100%;
   }
   
   body {
     background-color: #07080B;
     color: #F1F5F9;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   /* Custom gold scrollbar */
